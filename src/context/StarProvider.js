@@ -19,6 +19,8 @@ function StarProvider({ children }) {
     url: '',
   }]);
 
+  const [datafilter, setDataFilter] = useState(data);
+
   const [filterByName, setFilterByName] = useState('');
 
   useEffect(() => {
@@ -26,22 +28,20 @@ function StarProvider({ children }) {
       fetch('https://swapi-trybe.herokuapp.com/api/planets/')
         .then((response) => response.json())
         .then((dados) => {
-          const API = dados.results;
-          setData(API);
-          console.log('teste');
+          setData(dados.results);
         });
     };
     getPlanetsAPI();
-    console.log('teste');
   }, []);
 
   useEffect(() => {
-    const filterData = data.filter((planet) => planet.name.includes(filterByName));
-    setData(filterData);
-  }, [filterByName]);
+    const filterData = data.filter((planet) => planet.name.toLowerCase()
+      .includes(filterByName.toLowerCase()));
+    setDataFilter(filterData);
+  }, [filterByName, data]);
 
   return (
-    <StarContext.Provider value={ { data, filterByName, setFilterByName } }>
+    <StarContext.Provider value={ { datafilter, filterByName, setFilterByName } }>
       {children}
     </StarContext.Provider>
   );
