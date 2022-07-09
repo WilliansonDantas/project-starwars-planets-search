@@ -10,7 +10,7 @@ function StarProvider({ children }) {
     edited: '',
     films: [],
     gravity: '',
-    name: 0,
+    name: '',
     orbital_period: 0,
     population: 0,
     rotation_period: 0,
@@ -19,17 +19,34 @@ function StarProvider({ children }) {
     url: '',
   }]);
 
+  const [filterByName, setFilterByName] = useState('');
+
   useEffect(() => {
-    fetch('https://swapi-trybe.herokuapp.com/api/planets/')
-      .then((response) => response.json())
-      .then((dados) => {
-        const API = dados.results;
-        setData(API);
-      });
+    const getPlanetsAPI = () => {
+      fetch('https://swapi-trybe.herokuapp.com/api/planets/')
+        .then((response) => response.json())
+        .then((dados) => {
+          const API = dados.results;
+          setData(API);
+          console.log('teste');
+        });
+    };
+    getPlanetsAPI();
+    console.log('teste');
+  }, []);
+
+  useEffect(() => {
+    const filterName = () => {
+      const filterData = data.filter((planet) => planet.name.includes(filterByName));
+      setData(filterData);
+      console.log('teste');
+    };
+    filterName();
+    console.log('teste');
   }, []);
 
   return (
-    <StarContext.Provider value={ { data } }>
+    <StarContext.Provider value={ { data, filterByName, setFilterByName } }>
       {children}
     </StarContext.Provider>
   );
