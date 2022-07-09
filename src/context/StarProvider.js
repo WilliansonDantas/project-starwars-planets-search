@@ -43,7 +43,7 @@ function StarProvider({ children }) {
     };
     filterName();
     console.log('teste');
-  }, []);
+  }, [filterByName]);
 
   return (
     <StarContext.Provider value={ { data, filterByName, setFilterByName } }>

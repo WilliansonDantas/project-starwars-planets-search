@@ -1,21 +1,18 @@
 * {
-  padding:0;
-  margin:5px;
-  vertical-align:baseline;
-  list-style:none;
-  border:0;
   background-color:dimgray;
+  border:1px solid black;
   color:azure;
   font-size:large;
+  list-style:none;
+  margin-left:auto;
+  margin-right:auto;
+  padding:0;
+  text-align:center;
+  text-decoration:none;
+  /* vertical-align:baseline; */
+  vertical-align:middle;
+  width:100%;
   word-spacing:5px;
-  text-align: center;
-  border: 1px solid black;
-  margin-left: auto;
-  margin-right: auto;
-  vertical-align: middle;
-  /* border-collapse: collapse; */
-  width: 100%;
-  text-decoration: none;
   }
 
 .App {
