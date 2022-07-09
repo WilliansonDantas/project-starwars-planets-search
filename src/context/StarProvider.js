@@ -36,13 +36,8 @@ function StarProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const filterName = () => {
-      const filterData = data.filter((planet) => planet.name.includes(filterByName));
-      setData(filterData);
-      console.log('teste');
-    };
-    filterName();
-    console.log('teste');
+    const filterData = data.filter((planet) => planet.name.includes(filterByName));
+    setData(filterData);
   }, [filterByName]);
 
   return (

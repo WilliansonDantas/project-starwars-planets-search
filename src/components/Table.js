@@ -90,7 +90,6 @@ function Table() {
             </tbody>
           </table>
         )}
-      ;
     </>
   );
 }
