@@ -18,16 +18,18 @@ function StarProvider({ children }) {
     terrain: '',
     url: '',
   }]);
-
   const [datafilter, setDataFilter] = useState(data);
-
   const [filterByName, setFilterByName] = useState('');
+  const [column, setColumn] = useState('population');
+  const [comparison, setComparison] = useState('maior que');
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     const getPlanetsAPI = () => {
       fetch('https://swapi-trybe.herokuapp.com/api/planets/')
         .then((response) => response.json())
         .then((dados) => {
+          console.log(dados.results);
           setData(dados.results);
         });
     };
@@ -40,8 +42,41 @@ function StarProvider({ children }) {
     setDataFilter(filterData);
   }, [filterByName, data]);
 
+  const handleFilter = () => {
+    console.log(column);
+    console.log(comparison);
+    console.log(value);
+    if (comparison === 'maior que') {
+      console.log('entrou no maior que');
+      const filterMaior = data.filter((planet) => (planet[column]) >= (value));
+      setDataFilter(filterMaior);
+    }
+    if (comparison === 'menor que') {
+      console.log('entrou no menor que');
+      const filterMenor = data.filter((planet) => (planet[column]) <= (value));
+      setDataFilter(filterMenor);
+    }
+    if (comparison === 'igual a') {
+      console.log('entrou igual a');
+      const filterIgual = data.filter((planet) => (planet[column]) === (value));
+      setDataFilter(filterIgual);
+    }
+  };
+
   return (
-    <StarContext.Provider value={ { datafilter, filterByName, setFilterByName } }>
+    <StarContext.Provider
+      value={ {
+        datafilter,
+        filterByName,
+        setFilterByName,
+        column,
+        setColumn,
+        comparison,
+        setComparison,
+        value,
+        setValue,
+        handleFilter } }
+    >
       {children}
     </StarContext.Provider>
   );
