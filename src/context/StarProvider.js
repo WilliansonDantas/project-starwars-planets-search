@@ -29,7 +29,6 @@ function StarProvider({ children }) {
       fetch('https://swapi-trybe.herokuapp.com/api/planets/')
         .then((response) => response.json())
         .then((dados) => {
-          console.log(dados.results);
           setData(dados.results);
         });
     };
@@ -43,22 +42,19 @@ function StarProvider({ children }) {
   }, [filterByName, data]);
 
   const handleFilter = () => {
-    console.log(column);
-    console.log(comparison);
-    console.log(value);
     if (comparison === 'maior que') {
-      console.log('entrou no maior que');
-      const filterMaior = data.filter((planet) => (planet[column] * 1) > (value * 1));
+      const filterMaior = datafilter
+        .filter((planet) => (planet[column] * 1) > (value * 1));
       setDataFilter(filterMaior);
     }
     if (comparison === 'menor que') {
-      console.log('entrou no menor que');
-      const filterMenor = data.filter((planet) => (planet[column] * 1) < (value * 1));
+      const filterMenor = datafilter
+        .filter((planet) => (planet[column] * 1) < (value * 1));
       setDataFilter(filterMenor);
     }
     if (comparison === 'igual a') {
-      console.log('entrou igual a');
-      const filterIgual = data.filter((planet) => (planet[column] * 1) === (value * 1));
+      const filterIgual = datafilter
+        .filter((planet) => (planet[column] * 1) === (value * 1));
       setDataFilter(filterIgual);
     }
   };

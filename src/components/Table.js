@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import StarContext from '../context/StarContext';
 
-// Referência 01: Number.isNaN()
-// Link da documentação: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN
-
 function Table() {
   const { datafilter } = useContext(StarContext);
 
@@ -30,43 +27,43 @@ function Table() {
         { datafilter.map((element, index) => (
           <tr key={ index }>
             <td>
-              { (element.name)}
+              {(element.name)}
             </td>
             <td>
-              { (element.rotation_period)}
+              {(element.rotation_period)}
             </td>
             <td>
               {(element.orbital_period)}
             </td>
             <td>
-              { (element.diameter) }
+              {(element.diameter)}
             </td>
             <td>
-              { (element.climate) }
+              {(element.climate)}
             </td>
             <td>
-              { (element.gravity)}
+              {(element.gravity)}
             </td>
             <td>
-              { (element.terrain)}
+              {(element.terrain)}
             </td>
             <td>
-              { (element.surface_water) }
+              {(element.surface_water)}
             </td>
             <td>
-              { (element.population)}
+              {(element.population)}
             </td>
             <td>
-              { element.films }
+              {element.films}
             </td>
             <td>
-              { (element.created) }
+              {(element.created)}
             </td>
             <td>
-              { (element.edited)}
+              {(element.edited)}
             </td>
             <td>
-              { (element.url)}
+              {(element.url)}
             </td>
           </tr>
         ))}
