@@ -23,6 +23,19 @@ function StarProvider({ children }) {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState(0);
+  const [selectColumn, setSelectColumn] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
+  const [newSelectColumn, setNewSelectColumn] = useState(selectColumn);
+  const [selectComparison, setSelectComparison] = useState([
+    'maior que',
+    'menor que',
+    'igual a',
+  ]);
 
   useEffect(() => {
     const getPlanetsAPI = () => {
@@ -46,16 +59,25 @@ function StarProvider({ children }) {
       const filterMaior = datafilter
         .filter((planet) => (planet[column] * 1) > (value * 1));
       setDataFilter(filterMaior);
+      const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
+      setNewSelectColumn(filterColumn);
+      setColumn(filterColumn[0]);
     }
     if (comparison === 'menor que') {
       const filterMenor = datafilter
         .filter((planet) => (planet[column] * 1) < (value * 1));
       setDataFilter(filterMenor);
+      const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
+      setNewSelectColumn(filterColumn);
+      setColumn(filterColumn[0]);
     }
     if (comparison === 'igual a') {
       const filterIgual = datafilter
         .filter((planet) => (planet[column] * 1) === (value * 1));
       setDataFilter(filterIgual);
+      const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
+      setNewSelectColumn(filterColumn);
+      setColumn(filterColumn[0]);
     }
   };
 
@@ -71,7 +93,12 @@ function StarProvider({ children }) {
         setComparison,
         value,
         setValue,
-        handleFilter } }
+        handleFilter,
+        selectColumn,
+        setSelectColumn,
+        newSelectColumn,
+        selectComparison,
+        setSelectComparison } }
     >
       {children}
     </StarContext.Provider>

@@ -11,7 +11,9 @@ function Header() {
     setComparison,
     value,
     setValue,
-    handleFilter } = useContext(StarContext);
+    handleFilter,
+    newSelectColumn,
+    selectComparison } = useContext(StarContext);
 
   return (
     <>
@@ -37,11 +39,12 @@ function Header() {
             value={ column }
             onChange={ (e) => setColumn(e.target.value) }
           >
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            { newSelectColumn.map((options, ind) => (
+
+              <option key={ ind }>
+                {options}
+              </option>
+            ))}
           </select>
         </label>
         <hr />
@@ -54,9 +57,12 @@ function Header() {
             value={ comparison }
             onChange={ (e) => setComparison(e.target.value) }
           >
-            <option>maior que</option>
-            <option>menor que</option>
-            <option>igual a</option>
+            { selectComparison.map((selectOpt, indice) => (
+              <option key={ indice }>
+                { selectOpt }
+              </option>
+
+            ))}
           </select>
         </label>
         <hr />
