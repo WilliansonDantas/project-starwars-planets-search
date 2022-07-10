@@ -48,17 +48,17 @@ function StarProvider({ children }) {
     console.log(value);
     if (comparison === 'maior que') {
       console.log('entrou no maior que');
-      const filterMaior = data.filter((planet) => (planet[column]) >= (value));
+      const filterMaior = data.filter((planet) => (planet[column] * 1) > (value * 1));
       setDataFilter(filterMaior);
     }
     if (comparison === 'menor que') {
       console.log('entrou no menor que');
-      const filterMenor = data.filter((planet) => (planet[column]) <= (value));
+      const filterMenor = data.filter((planet) => (planet[column] * 1) < (value * 1));
       setDataFilter(filterMenor);
     }
     if (comparison === 'igual a') {
       console.log('entrou igual a');
-      const filterIgual = data.filter((planet) => (planet[column]) === (value));
+      const filterIgual = data.filter((planet) => (planet[column] * 1) === (value * 1));
       setDataFilter(filterIgual);
     }
   };
