@@ -94,30 +94,28 @@ function StarProvider({ children }) {
     const filterDosFiltros = arrayFiltros.filter((filtro) => filtro !== filters);
     setArrayFiltros(filterDosFiltros);
     const indiceZeroFilters = filters[0];
-    const indiceUmFilters = filters[1];
-    const indiceDoisFilters = filters[2];
+    // const indiceUmFilters = filters[1];
+    // const indiceDoisFilters = filters[2];
     const splitIndiceZeroFilters = indiceZeroFilters.split(' ')[0];
     const filterColumn = selectColumn
       .filter((selectCol) => selectCol === splitIndiceZeroFilters);
     setNewSelectColumn([...newSelectColumn, filterColumn]);
     setColumn(filterColumn[0]);
-
-    if (indiceUmFilters === 'maior que') {
-      const filterExcluido = data
-        .filter((planet) => (planet[indiceZeroFilters] * 1) > (indiceDoisFilters * 1));
-      setDataFilter(filterExcluido);
-    }
-    if (indiceUmFilters === 'menor que') {
-      console.log('entrou no menor que');
-      const filterExcluido = data
-        .filter((planet) => (planet[indiceZeroFilters] * 1) < (indiceDoisFilters * 1));
-      setDataFilter(filterExcluido);
-    }
-    if (indiceUmFilters === 'igual a') {
-      const filterExcluido = data
-        .filter((planet) => (planet[indiceZeroFilters] * 1) === (indiceDoisFilters * 1));
-      setDataFilter(filterExcluido);
-    }
+    // if (indiceUmFilters === 'maior que') {
+    //   const filterMaior = datafilter
+    //     .filter((planet) => (planet[indiceZeroFilters] * 1) > (indiceDoisFilters * 1));
+    //   setDataFilter(filterMaior);
+    // }
+    // if (indiceUmFilters === 'menor que') {
+    //   const filterMenor = datafilter
+    //     .filter((planet) => (planet[indiceZeroFilters] * 1) < (indiceDoisFilters * 1));
+    //   setDataFilter(filterMenor);
+    // }
+    // if (indiceUmFilters === 'igual a') {
+    //   const filterIgual = datafilter
+    //     .filter((planet) => (planet[indiceZeroFilters] * 1) === (indiceDoisFilters * 1));
+    //   setDataFilter(filterIgual);
+    // }
   };
 
   const deleteAllFilters = () => {
