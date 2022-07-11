@@ -13,7 +13,12 @@ function Header() {
     setValue,
     handleFilter,
     newSelectColumn,
-    selectComparison } = useContext(StarContext);
+    selectComparison,
+    arrayFiltros,
+    deleteButton,
+    deleteAllFilters,
+    setTargetFilter,
+  } = useContext(StarContext);
 
   return (
     <>
@@ -85,6 +90,36 @@ function Header() {
           Filter
         </button>
       </form>
+      <hr />
+      <form>
+        Filters:
+        { arrayFiltros.map((filters, index) => (
+          <div
+            key={ index }
+            data-testid="filter"
+            name="targetFilter"
+            value={ filters }
+            onChange={ (e) => setTargetFilter(e.target.value) }
+          >
+            { filters }
+            <button
+              type="button"
+              onClick={ () => deleteButton(filters) }
+              data-testid="filter"
+            >
+              Delete
+            </button>
+          </div>
+        )) }
+      </form>
+      <hr />
+      <button
+        type="button"
+        onClick={ deleteAllFilters }
+        data-testid="button-remove-filters"
+      >
+        Remover todas filtragens
+      </button>
       <hr />
     </>
   );

@@ -36,6 +36,8 @@ function StarProvider({ children }) {
     'menor que',
     'igual a',
   ]);
+  const [arrayFiltros, setArrayFiltros] = useState([]);
+  const [targetFilter, setTargetFilter] = useState('');
 
   useEffect(() => {
     const getPlanetsAPI = () => {
@@ -62,6 +64,8 @@ function StarProvider({ children }) {
       const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
       setNewSelectColumn(filterColumn);
       setColumn(filterColumn[0]);
+      const stringFilter = `${column} ${comparison} ${value}`;
+      setArrayFiltros([...arrayFiltros, [stringFilter]]);
     }
     if (comparison === 'menor que') {
       const filterMenor = datafilter
@@ -70,6 +74,8 @@ function StarProvider({ children }) {
       const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
       setNewSelectColumn(filterColumn);
       setColumn(filterColumn[0]);
+      const stringFilter = `${column} ${comparison} ${value}`;
+      setArrayFiltros([...arrayFiltros, [stringFilter]]);
     }
     if (comparison === 'igual a') {
       const filterIgual = datafilter
@@ -78,7 +84,52 @@ function StarProvider({ children }) {
       const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
       setNewSelectColumn(filterColumn);
       setColumn(filterColumn[0]);
+      const stringFilter = `${column} ${comparison} ${value}`;
+      setArrayFiltros([...arrayFiltros, [stringFilter]]);
     }
+  };
+
+  const deleteButton = (filters) => {
+    console.log(data);
+    const filterDosFiltros = arrayFiltros.filter((filtro) => filtro !== filters);
+    setArrayFiltros(filterDosFiltros);
+    const indiceZeroFilters = filters[0];
+    const indiceUmFilters = filters[1];
+    const indiceDoisFilters = filters[2];
+    const splitIndiceZeroFilters = indiceZeroFilters.split(' ')[0];
+    const filterColumn = selectColumn
+      .filter((selectCol) => selectCol === splitIndiceZeroFilters);
+    setNewSelectColumn([...newSelectColumn, filterColumn]);
+    setColumn(filterColumn[0]);
+
+    if (indiceUmFilters === 'maior que') {
+      const filterExcluido = data
+        .filter((planet) => (planet[indiceZeroFilters] * 1) > (indiceDoisFilters * 1));
+      setDataFilter(filterExcluido);
+    }
+    if (indiceUmFilters === 'menor que') {
+      console.log('entrou no menor que');
+      const filterExcluido = data
+        .filter((planet) => (planet[indiceZeroFilters] * 1) < (indiceDoisFilters * 1));
+      setDataFilter(filterExcluido);
+    }
+    if (indiceUmFilters === 'igual a') {
+      const filterExcluido = data
+        .filter((planet) => (planet[indiceZeroFilters] * 1) === (indiceDoisFilters * 1));
+      setDataFilter(filterExcluido);
+    }
+  };
+
+  const deleteAllFilters = () => {
+    setNewSelectColumn([
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ]);
+    setArrayFiltros([]);
+    setDataFilter(data);
   };
 
   return (
@@ -98,7 +149,12 @@ function StarProvider({ children }) {
         setSelectColumn,
         newSelectColumn,
         selectComparison,
-        setSelectComparison } }
+        setSelectComparison,
+        arrayFiltros,
+        targetFilter,
+        setTargetFilter,
+        deleteButton,
+        deleteAllFilters } }
     >
       {children}
     </StarContext.Provider>
