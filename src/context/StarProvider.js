@@ -6,20 +6,21 @@ function StarProvider({ children }) {
   const [data, setData] = useState([{
     climate: '',
     created: '',
-    diameter: 0,
+    diameter: '',
     edited: '',
-    films: [],
+    films: '',
     gravity: '',
     name: '',
-    orbital_period: 0,
-    population: 0,
-    rotation_period: 0,
-    surface_water: 0,
+    orbital_period: '',
+    population: '',
+    rotation_period: '',
+    surface_water: '',
     terrain: '',
     url: '',
   }]);
   const [datafilter, setDataFilter] = useState(data);
   const [filterByName, setFilterByName] = useState('');
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState(0);
@@ -36,8 +37,6 @@ function StarProvider({ children }) {
     'menor que',
     'igual a',
   ]);
-  const [arrayFiltros, setArrayFiltros] = useState([]);
-  const [targetFilter, setTargetFilter] = useState('');
 
   useEffect(() => {
     const getPlanetsAPI = () => {
@@ -57,78 +56,43 @@ function StarProvider({ children }) {
   }, [filterByName, data]);
 
   const handleFilter = () => {
-    if (comparison === 'maior que') {
-      const filterMaior = datafilter
-        .filter((planet) => (planet[column] * 1) > (value * 1));
-      setDataFilter(filterMaior);
-      const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
-      setNewSelectColumn(filterColumn);
-      setColumn(filterColumn[0]);
-      const stringFilter = `${column} ${comparison} ${value}`;
-      setArrayFiltros([...arrayFiltros, [stringFilter]]);
-    }
-    if (comparison === 'menor que') {
-      const filterMenor = datafilter
-        .filter((planet) => (planet[column] * 1) < (value * 1));
-      setDataFilter(filterMenor);
-      const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
-      setNewSelectColumn(filterColumn);
-      setColumn(filterColumn[0]);
-      const stringFilter = `${column} ${comparison} ${value}`;
-      setArrayFiltros([...arrayFiltros, [stringFilter]]);
-    }
-    if (comparison === 'igual a') {
-      const filterIgual = datafilter
-        .filter((planet) => (planet[column] * 1) === (value * 1));
-      setDataFilter(filterIgual);
-      const filterColumn = newSelectColumn.filter((selectCol) => selectCol !== column);
-      setNewSelectColumn(filterColumn);
-      setColumn(filterColumn[0]);
-      const stringFilter = `${column} ${comparison} ${value}`;
-      setArrayFiltros([...arrayFiltros, [stringFilter]]);
-    }
+    setFilterByNumericValues([...filterByNumericValues, { column, comparison, value }]);
   };
 
-  const deleteButton = (filters) => {
-    console.log(data);
-    const filterDosFiltros = arrayFiltros.filter((filtro) => filtro !== filters);
-    setArrayFiltros(filterDosFiltros);
-    const indiceZeroFilters = filters[0];
-    // const indiceUmFilters = filters[1];
-    // const indiceDoisFilters = filters[2];
-    const splitIndiceZeroFilters = indiceZeroFilters.split(' ')[0];
-    const filterColumn = selectColumn
-      .filter((selectCol) => selectCol === splitIndiceZeroFilters);
-    setNewSelectColumn([...newSelectColumn, filterColumn]);
-    setColumn(filterColumn[0]);
-    // if (indiceUmFilters === 'maior que') {
-    //   const filterMaior = datafilter
-    //     .filter((planet) => (planet[indiceZeroFilters] * 1) > (indiceDoisFilters * 1));
-    //   setDataFilter(filterMaior);
-    // }
-    // if (indiceUmFilters === 'menor que') {
-    //   const filterMenor = datafilter
-    //     .filter((planet) => (planet[indiceZeroFilters] * 1) < (indiceDoisFilters * 1));
-    //   setDataFilter(filterMenor);
-    // }
-    // if (indiceUmFilters === 'igual a') {
-    //   const filterIgual = datafilter
-    //     .filter((planet) => (planet[indiceZeroFilters] * 1) === (indiceDoisFilters * 1));
-    //   setDataFilter(filterIgual);
-    // }
-  };
-
-  const deleteAllFilters = () => {
-    setNewSelectColumn([
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ]);
-    setArrayFiltros([]);
-    setDataFilter(data);
-  };
+  useEffect(() => {
+    filterByNumericValues.forEach((arrayFilters) => {
+      if (arrayFilters.comparison === 'maior que') {
+        const filterMaior = datafilter
+          .filter((planet) => (planet[arrayFilters.column] * 1)
+          > (arrayFilters.value * 1));
+        setDataFilter(filterMaior);
+        const filterColumn = newSelectColumn
+          .filter((selectCol) => selectCol !== arrayFilters.column);
+        setNewSelectColumn(filterColumn);
+        setColumn(filterColumn[0]);
+      }
+      if (arrayFilters.comparison === 'menor que') {
+        const filterMenor = datafilter
+          .filter((planet) => (planet[arrayFilters.column] * 1)
+          < (arrayFilters.value * 1));
+        setDataFilter(filterMenor);
+        const filterColumn = newSelectColumn
+          .filter((selectCol) => selectCol !== arrayFilters.column);
+        setNewSelectColumn(filterColumn);
+        setColumn(filterColumn[0]);
+      }
+      if (arrayFilters.comparison === 'igual a') {
+        const filterIgual = datafilter
+          .filter((planet) => (planet[arrayFilters.column] * 1)
+          === (arrayFilters.value * 1));
+        setDataFilter(filterIgual);
+        const filterColumn = newSelectColumn
+          .filter((selectCol) => selectCol !== arrayFilters.column);
+        setNewSelectColumn(filterColumn);
+        setColumn(filterColumn[0]);
+      }
+    });
+  }, [filterByNumericValues]);
 
   return (
     <StarContext.Provider
@@ -148,11 +112,12 @@ function StarProvider({ children }) {
         newSelectColumn,
         selectComparison,
         setSelectComparison,
-        arrayFiltros,
-        targetFilter,
-        setTargetFilter,
-        deleteButton,
-        deleteAllFilters } }
+        setFilterByNumericValues,
+        filterByNumericValues,
+        setNewSelectColumn,
+        data,
+        setDataFilter,
+      } }
     >
       {children}
     </StarContext.Provider>

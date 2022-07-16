@@ -12,12 +12,14 @@ function Header() {
     value,
     setValue,
     handleFilter,
+    selectColumn,
     newSelectColumn,
     selectComparison,
-    arrayFiltros,
-    deleteButton,
-    deleteAllFilters,
-    setTargetFilter,
+    setFilterByNumericValues,
+    filterByNumericValues,
+    setNewSelectColumn,
+    data,
+    setDataFilter,
   } = useContext(StarContext);
 
   return (
@@ -93,19 +95,27 @@ function Header() {
       <hr />
       <form>
         Filters:
-        { arrayFiltros.map((filters, index) => (
+        { filterByNumericValues.map((filters, index) => (
           <div
             key={ index }
             data-testid="filter"
             name="targetFilter"
             value={ filters }
-            onChange={ (e) => setTargetFilter(e.target.value) }
           >
-            { filters }
+            { `${filters.column} ${filters.comparison} ${filters.value}` }
             <button
               type="button"
-              onClick={ () => deleteButton(filters) }
-              data-testid="filter"
+              onClick={ () => {
+                setDataFilter(data);
+                setFilterByNumericValues(
+                  filterByNumericValues
+                    .filter((filterDelet) => filterDelet !== filters),
+                );
+                const testeTeste = selectColumn
+                  .filter((selectCol) => selectCol === filters.column);
+                setNewSelectColumn([...newSelectColumn, testeTeste]);
+                setColumn(newSelectColumn[0]);
+              } }
             >
               Delete
             </button>
@@ -115,8 +125,12 @@ function Header() {
       <hr />
       <button
         type="button"
-        onClick={ deleteAllFilters }
         data-testid="button-remove-filters"
+        onClick={ () => {
+          setFilterByNumericValues([]);
+          setDataFilter(data);
+          setNewSelectColumn(selectColumn);
+        } }
       >
         Remover todas filtragens
       </button>
