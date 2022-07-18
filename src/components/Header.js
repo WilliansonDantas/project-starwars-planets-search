@@ -48,7 +48,9 @@ function Header() {
           >
             { newSelectColumn.map((options, ind) => (
 
-              <option key={ ind }>
+              <option
+                key={ ind }
+              >
                 {options}
               </option>
             ))}
@@ -111,9 +113,9 @@ function Header() {
                   filterByNumericValues
                     .filter((filterDelet) => filterDelet !== filters),
                 );
-                const testeTeste = selectColumn
+                const filterColumn = selectColumn
                   .filter((selectCol) => selectCol === filters.column);
-                setNewSelectColumn([...newSelectColumn, testeTeste]);
+                setNewSelectColumn([...newSelectColumn, filterColumn]);
                 setColumn(newSelectColumn[0]);
               } }
             >
