@@ -243,128 +243,109 @@ const planetsMock = {
   ],
 };
 
-const testData = { column: 'population', comparison: 'maior que', value: '0' }
-
-describe("Testes para 50% de cobertura total da aplicação", () => {
+describe("Testes para cobertura total da aplicação", () => {
   it("Verifica as tags renderizadas na Tabela", () => {
     render(<App />);
-        
-  const nameTable = screen.getByRole('columnheader', {  name: /name/i});
-  expect(nameTable).toBeInTheDocument();
-  
-  const rotationTable = screen.getByRole('columnheader', {  name: /rotation_period/i});
-  expect(rotationTable).toBeInTheDocument();
-  
-  const orbitalTable = screen.getByRole('columnheader', {  name: /orbital_period/i});
-  expect(orbitalTable).toBeInTheDocument();
-  
-  const diameterTable = screen.getByRole('columnheader', {  name: /diameter/i});
-  expect(diameterTable).toBeInTheDocument();
-  
-  const climateTable = screen.getByRole('columnheader', {  name: /climate/i});
-  expect(climateTable).toBeInTheDocument();
-  
-  const gravityTable = screen.getByRole('columnheader', {  name: /gravity/i});
-  expect(gravityTable).toBeInTheDocument();
-  
-  const terrainTable = screen.getByRole('columnheader', {  name: /terrain/i});
-  expect(terrainTable).toBeInTheDocument();
-  
-  const surfaceTable = screen.getByRole('columnheader', {  name: /surface_water/i});
-  expect(surfaceTable).toBeInTheDocument();
-  
-  const populationTable = screen.getByRole('columnheader', {  name: /population/i});
-  expect(populationTable).toBeInTheDocument();
-  
-  const filmsTable = screen.getByRole('columnheader', {  name: /films/i});
-  expect(filmsTable).toBeInTheDocument();
-  
-  const createdTable = screen.getByRole('columnheader', {  name: /created/i});
-  expect(createdTable).toBeInTheDocument();
-  
-  const editedTable = screen.getByRole('columnheader', {  name: /edited/i});
-  expect(editedTable).toBeInTheDocument();
-  
-  const urlTable = screen.getByRole('columnheader', {  name: /url/i});
-  expect(urlTable).toBeInTheDocument();
+          
+    const nameTable = screen.getByRole('columnheader', {  name: /name/i});
+    expect(nameTable).toBeInTheDocument();
+    
+    const rotationTable = screen.getByRole('columnheader', {  name: /rotation_period/i});
+    expect(rotationTable).toBeInTheDocument();
+    
+    const orbitalTable = screen.getByRole('columnheader', {  name: /orbital_period/i});
+    expect(orbitalTable).toBeInTheDocument();
+    
+    const diameterTable = screen.getByRole('columnheader', {  name: /diameter/i});
+    expect(diameterTable).toBeInTheDocument();
+    
+    const climateTable = screen.getByRole('columnheader', {  name: /climate/i});
+    expect(climateTable).toBeInTheDocument();
+    
+    const gravityTable = screen.getByRole('columnheader', {  name: /gravity/i});
+    expect(gravityTable).toBeInTheDocument();
+    
+    const terrainTable = screen.getByRole('columnheader', {  name: /terrain/i});
+    expect(terrainTable).toBeInTheDocument();
+    
+    const surfaceTable = screen.getByRole('columnheader', {  name: /surface_water/i});
+    expect(surfaceTable).toBeInTheDocument();
+    
+    const populationTable = screen.getByRole('columnheader', {  name: /population/i});
+    expect(populationTable).toBeInTheDocument();
+    
+    const filmsTable = screen.getByRole('columnheader', {  name: /films/i});
+    expect(filmsTable).toBeInTheDocument();
+    
+    const createdTable = screen.getByRole('columnheader', {  name: /created/i});
+    expect(createdTable).toBeInTheDocument();
+    
+    const editedTable = screen.getByRole('columnheader', {  name: /edited/i});
+    expect(editedTable).toBeInTheDocument();
+    
+    const urlTable = screen.getByRole('columnheader', {  name: /url/i});
+    expect(urlTable).toBeInTheDocument();
   
 });
 
 it("Verifica chamada da API inputs e botões renderizados na tela", async () => {
-  jest.spyOn(global, 'fetch')
-    .mockResolvedValue({ json: jest.fn().mockResolvedValue(planetsMock) })
-    render(<App />);
+    jest.spyOn(global, 'fetch')
+      .mockResolvedValue({ json: jest.fn().mockResolvedValue(planetsMock) })
+      render(<App />);
 
-  const nameStarWars = screen.getByRole('heading', {  name: /star wars/i});
-  expect(nameStarWars).toBeInTheDocument();
+    const nameStarWars = screen.getByRole('heading', {  name: /star wars/i});
+    expect(nameStarWars).toBeInTheDocument();
+      
+    const inputPlanet = screen.getByRole('searchbox');
+    expect(inputPlanet).toHaveProperty('type', 'search');
+    expect(inputPlanet).toBeInTheDocument();
+    userEvent.type(inputPlanet, 'oo');
+    expect(inputPlanet).toHaveValue('oo');
+    const planetElement = await screen.findByRole('cell', {  name: /tatooine/i});
+    expect(planetElement).toBeInTheDocument();
+    expect(global.fetch).toHaveBeenCalled();
+    expect(global.fetch).toBeCalledTimes(1);
+
+    global.fetch.mockRestore()
+    jest.restoreAllMocks()
+  });
+
+  it("Verifica chamada da API inputs e botões renderizados na tela", async () => {  
+      render(<App />);
     
-  const inputPlanet = screen.getByRole('searchbox');
-  expect(inputPlanet).toHaveProperty('type', 'search');
-  expect(inputPlanet).toBeInTheDocument();
-  userEvent.type(inputPlanet, 'oo');
-  expect(inputPlanet).toHaveValue('oo');
-  const planetElement = await screen.findByRole('cell', {  name: /tatooine/i});
-  expect(planetElement).toBeInTheDocument();
-  expect(global.fetch).toHaveBeenCalled();
-  expect(global.fetch).toBeCalledTimes(1);
-
-  global.fetch.mockRestore()
-  jest.restoreAllMocks()
-});
-
-it("Verifica chamada da API inputs e botões renderizados na tela", async () => {  
-    render(<App />);
-  
-  const selectColumn = screen.getByText(/column:/i);
-  expect(selectColumn).toBeInTheDocument();
-  
-  const optionsColumn = screen.getByRole('combobox', {  name: /column:/i});
-  expect(optionsColumn).toBeInTheDocument();
-  userEvent.type(optionsColumn, 'population');
-  expect(optionsColumn).toHaveValue('population');
-  
-  const selectComparison = screen.getByText(/comparison:/i);
-  expect(selectComparison).toBeInTheDocument();
-  
-  const optionsComparison = screen.getByRole('combobox', {  name: /comparison:/i})
-  expect(optionsComparison).toBeInTheDocument();
-  userEvent.type(optionsComparison, 'maior que');
-  expect(optionsComparison).toHaveValue('maior que');
-  
-  const nameValue = screen.getByText(/value:/i);
-  expect(nameValue).toBeInTheDocument();
-  
-  const inputValue = screen.getByRole('textbox', {  name: /value:/i});
-  expect(inputValue).toBeInTheDocument();
-  userEvent.type(inputValue, '0');
-  expect(inputValue).toHaveValue('00');
-  
-  const buttonFilter = screen.getByRole('button', {  name: /filter/i});
-  expect(buttonFilter).toBeInTheDocument();
-  userEvent.click(inputValue);
-  // const planetEx = await screen.findByRole('cell', {  name: /tatooine/i});
-  // expect(planetEx).toBeInTheDocument();
-  
-  const allDelete = screen.getByRole('button', { name: /remover todas filtragens/i })
-  expect(allDelete).toBeInTheDocument();
-  userEvent.click(allDelete);
-  
-  // global.fetch.mockRestore()
-  // jest.restoreAllMocks()
-  
-  // const columnIf = screen.getByLabelText(/Column/i);
-  // const comparisonIf = screen.getByLabelText(/Comparison/i);
-  // const valueIf = screen.getByLabelText(/Value/i);
-  
-  // userEvent.type(columnIf, testData.column);
-  // userEvent.type(comparisonIf, testData.comparison);
-  // userEvent.type(valueIf, testData.value);
-  
-  // expect(columnIf.value).toEqual(testData.column);
-  // expect(comparisonIf.value).toEqual(testData.comparison);
-  // expect(valueIf.value).toEqual(testData.value);
-  
-  // userEvent.click(screen.getByText(/Filter/i));
+    const selectColumn = screen.getByText(/column:/i);
+    expect(selectColumn).toBeInTheDocument();
+    
+    const optionsColumn = screen.getByRole('combobox', {  name: /column:/i});
+    expect(optionsColumn).toBeInTheDocument();
+    userEvent.type(optionsColumn, 'population');
+    expect(optionsColumn).toHaveValue('population');
+    
+    const selectComparison = screen.getByText(/comparison:/i);
+    expect(selectComparison).toBeInTheDocument();
+    
+    const optionsComparison = screen.getByRole('combobox', {  name: /comparison:/i})
+    expect(optionsComparison).toBeInTheDocument();
+    userEvent.type(optionsComparison, 'maior que');
+    expect(optionsComparison).toHaveValue('maior que');
+    
+    const nameValue = screen.getByText(/value:/i);
+    expect(nameValue).toBeInTheDocument();
+    
+    const inputValue = screen.getByRole('textbox', {  name: /value:/i});
+    expect(inputValue).toBeInTheDocument();
+    userEvent.type(inputValue, '0');
+    expect(inputValue).toHaveValue('00');
+    
+    const buttonFilter = screen.getByRole('button', {  name: /filter/i});
+    expect(buttonFilter).toBeInTheDocument();
+    userEvent.click(inputValue);
+    const filtersMade = screen.getByText(/filters:/i)
+    expect(filtersMade).toBeInTheDocument();
+    
+    const allDelete = screen.getByRole('button', { name: /remover todas filtragens/i })
+    expect(allDelete).toBeInTheDocument();
+    userEvent.click(allDelete);
 
 });
 
@@ -372,72 +353,68 @@ it("Verifica chamada da API inputs e botões renderizados na tela", async () => 
   it("Verifica condicional 'maior que'", () => {
       render(<App />);
 
-  // if maior que
-  const maiorQue = screen.getByRole('combobox', {  name: /comparison:/i, option: /maior que/i })
-  userEvent.type(maiorQue, 'maior que');
-  expect(maiorQue).toHaveValue('maior que');
-  const filterColumn = screen.getByRole('combobox', {  name: /column:/i,  option: /population/i });
-  userEvent.type(filterColumn, 'population');
-  expect(filterColumn).toHaveValue('population');
-  const inputValue = screen.getByRole('textbox', {  name: /value:/i,  value: /0/i });
-  userEvent.type(inputValue, '0');
-  expect(inputValue).toHaveValue('00');
-  const buttonFilter = screen.getByRole('button', {  name: /filter/i});
-  userEvent.click(buttonFilter);
-  });
+    // if maior que
+    const maiorQue = screen.getByRole('combobox', {  name: /comparison:/i, option: /maior que/i })
+    userEvent.type(maiorQue, 'maior que');
+    expect(maiorQue).toHaveValue('maior que');
+    const filterColumn = screen.getByRole('combobox', {  name: /column:/i,  option: /population/i });
+    userEvent.type(filterColumn, 'population');
+    expect(filterColumn).toHaveValue('population');
+    const inputValue = screen.getByRole('textbox', {  name: /value:/i,  value: /0/i });
+    userEvent.type(inputValue, '0');
+    expect(inputValue).toHaveValue('00');
+    const buttonFilter = screen.getByRole('button', {  name: /filter/i});
+    userEvent.click(buttonFilter);
+    const filterDelete = screen.getByRole('button', {name: /delete/i})
+    expect(filterDelete).toBeInTheDocument();
+    userEvent.click(filterDelete);  
+    });
 
-  // it("Verifica condicional 'menor que'", () => {
-  //       render(<App />);
+  it("Verifica condicional 'menor que'", () => {
+        render(<App />);
+    // Referência 01: selectOptions
+    // https://testing-library.com/docs/ecosystem-user-event/
+    // Referência 02: selectOptions
+    // https://cathalmacdonnacha.com/how-to-test-a-select-element-with-react-testing-library
+    // if menor que
+    const menorQue = screen.getByRole('combobox', {  name: /comparison:/i, option: /menor que/i })
+    userEvent.selectOptions(menorQue, 'menor que')
+    userEvent.type(menorQue, 'menor que');
+    expect(menorQue).toHaveValue('menor que');
+    const filterColumn = screen.getByRole('combobox', {  name: /column:/i,  option: /diameter/i });
+    userEvent.selectOptions(filterColumn, 'diameter')
+    userEvent.type(filterColumn, 'diameter');
+    expect(filterColumn).toHaveValue('diameter');
+    const inputValue = screen.getByRole('textbox', {  name: /value:/i,  value: /11000/i });
+    userEvent.type(inputValue, '11000');
+    expect(inputValue).toHaveValue('011000');
+    const buttonFilter = screen.getByRole('button', {  name: /filter/i});
+    userEvent.click(buttonFilter);
+    const filterDelete = screen.getByRole('button', {name: /delete/i})
+    expect(filterDelete).toBeInTheDocument();
+    userEvent.click(filterDelete); 
+    });
 
-    // if menor que
-    // const menorQue = screen.getByRole('combobox', {  name: /comparison:/i, option: /menor que/i })
-    // userEvent.type(menorQue, 'menor que');
-    // expect(menorQue).toHaveValue('menor que');
-    // const filterColumn = screen.getByRole('combobox', {  name: /column:/i,  option: /diameter/i });
-    // userEvent.type(filterColumn, 'diameter');
-    // expect(filterColumn).toHaveValue('diameter');
-    // const inputValue = screen.getByRole('textbox', {  name: /value:/i,  value: /11000/i });
-    // userEvent.type(inputValue, '11000');
-    // expect(inputValue).toHaveValue('011000');
-    // const buttonFilter = screen.getByRole('button', {  name: /filter/i});
-    // userEvent.click(buttonFilter);
+
+    it("Verifica condicional 'igual a'", () => {
+      render(<App />);
   
-    // if menor que
-    // userEvent.selectOptions((getByRole("select-multiple"), [getByText('menor que')]))
-    // const menorQue = screen.getByRole('combobox', {  name: /menor que/i})
-    // userEvent.type(menorQue, 'menor que');
-    // expect(menorQue).toHaveValue('menor que');
-    // userEvent.selectOptions(screen.getByRole('combobox'))
-    // const filterMenor = screen.getByRole('combobox', {  name: /diameter/i });
-    // expect(filterMenor).toBeInTheDocument();
-    // userEvent.type(filterMenor, 'diameter');
-    // expect(filterMenor).toHaveValue('diameter');
-    // const inputMenor = screen.getByRole('textbox', {  name: /value:/i, value: /11000/i});
-    // expect(inputMenor).toBeInTheDocument();
-    // userEvent.type(inputMenor, '11000');
-    // expect(inputMenor).toHaveValue('11000');
-    // const buttonMenor = screen.getByRole('button', {  name: /filter/i});
-    // expect(buttonMenor).toBeInTheDocument();
-    // userEvent.click(buttonMenor);
-    // const planetMenor = screen.getByRole('cell', {  name: /endor/i});
-    // expect(planetMenor).toBeInTheDocument();
-  
-     // if igual a
-    //  const igualA = screen.getByRole('combobox', {  name: /comparison:/i, option: /igual a/i })
-    //  userEvent.type(igualA, 'igual a');
-    //  expect(igualA).toHaveValue('igual a');
-    //  const filterIgual = screen.getByRole('combobox', {  name: /column:/i, option: /rotation_period/i});
-    //  expect(filterIgual).toBeInTheDocument();
-    //  userEvent.type(filterIgual, 'rotation_period');
-    //  expect(filterIgual).toHaveValue('rotation_period');
-    //  const inputIgual = screen.getByRole('textbox', {  name: /value:/i, value: /24/i});
-    //  expect(inputIgual).toBeInTheDocument();
-    //  userEvent.type(inputIgual, '24');
-    //  expect(inputIgual).toHaveValue('24');
-    //  const buttonIgual = screen.getByRole('button', {  name: /filter/i});
-    //  expect(buttonIgual).toBeInTheDocument();
-    //  userEvent.click(buttonIgual);
-    //  const planetIgual = screen.getByRole('cell', {  name: /yavin iv/i});
-    //  expect(planetIgual).toBeInTheDocument();
-    // });
+    // if igual a
+    const igualA = screen.getByRole('combobox', {  name: /comparison:/i, option: /igual a/i })
+    userEvent.selectOptions(igualA, 'igual a')
+    userEvent.type(igualA, 'igual a');
+    expect(igualA).toHaveValue('igual a');
+    const filterIgual = screen.getByRole('combobox', {  name: /column:/i, option: /rotation_period/i});
+    userEvent.selectOptions(filterIgual, 'rotation_period')
+    userEvent.type(filterIgual, 'rotation_period');
+    expect(filterIgual).toHaveValue('rotation_period');
+    const inputIgual = screen.getByRole('textbox', {  name: /value:/i, value: /24/i});
+    userEvent.type(inputIgual, '24');
+    expect(inputIgual).toHaveValue('024');
+    const buttonIgual = screen.getByRole('button', {  name: /filter/i});
+    userEvent.click(buttonIgual);
+    const filterDelete = screen.getByRole('button', {name: /delete/i})
+    expect(filterDelete).toBeInTheDocument();
+    userEvent.click(filterDelete); 
+    });
 });
