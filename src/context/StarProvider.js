@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import StarContext from './StarContext';
 
+const UM = 1;
+const MENOS_UM = -1;
+
 function StarProvider({ children }) {
   const [data, setData] = useState([{
     climate: '',
@@ -37,12 +40,31 @@ function StarProvider({ children }) {
     'menor que',
     'igual a',
   ]);
+  const [sortedColumn, setSortedColumn] = useState('population');
+  const [successors, setSuccessors] = useState('');
+  const [order, setOrder] = useState();
+  const [sort, setSort] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
+  // Referência 01: sort() em array de objetos
+  // https://www.edsonemiliano.com.br/blog/como-ordenar-uma-array-de-objetos-com-javascript-sort/
   useEffect(() => {
     const getPlanetsAPI = () => {
       fetch('https://swapi-trybe.herokuapp.com/api/planets/')
         .then((response) => response.json())
         .then((dados) => {
+          dados.results
+            .sort((a, b) => {
+              if (a.name > b.name) {
+                return UM;
+              }
+              return MENOS_UM;
+            });
           setData(dados.results);
         });
     };
@@ -94,6 +116,22 @@ function StarProvider({ children }) {
     });
   }, [filterByNumericValues]);
 
+  const handleSort = () => {
+    setOrder({ sortedColumn, successors });
+    if (successors === 'ASC') {
+      const ASC = datafilter
+        .sort((itemA, itemB) => ((itemA[sortedColumn] * 1
+          || 0) - (itemB[sortedColumn] * 1 || 0)));
+      setDataFilter(ASC);
+    }
+    if (successors === 'DESC') {
+      const DESC = datafilter
+        .sort((itemA, itemB) => ((itemB[sortedColumn] * 1
+          || 0) - (itemA[sortedColumn] * 1 || 0)));
+      setDataFilter(DESC);
+    }
+  };
+
   return (
     <StarContext.Provider
       value={ {
@@ -117,6 +155,15 @@ function StarProvider({ children }) {
         setNewSelectColumn,
         data,
         setDataFilter,
+        sort,
+        setSort,
+        handleSort,
+        sortedColumn,
+        setSortedColumn,
+        successors,
+        setSuccessors,
+        order,
+        setOrder,
       } }
     >
       {children}

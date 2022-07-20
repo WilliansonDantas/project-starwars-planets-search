@@ -20,6 +20,11 @@ function Header() {
     setNewSelectColumn,
     data,
     setDataFilter,
+    sort,
+    handleSort,
+    setSortedColumn,
+    sortedColumn,
+    setSuccessors,
   } = useContext(StarContext);
 
   return (
@@ -137,6 +142,58 @@ function Header() {
         Remover todas filtragens
       </button>
       <hr />
+      <form>
+        <label htmlFor="sortedColumn">
+          Order:
+          <select
+            id="sortedColumn"
+            data-testid="column-sort"
+            name="sortedColumn"
+            value={ sortedColumn }
+            onChange={ (e) => setSortedColumn(e.target.value) }
+          >
+            { sort.map((option, index) => (
+
+              <option
+                key={ index }
+              >
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+        <hr />
+        <label htmlFor="sortASC">
+          Ascendente
+          <input
+            id="sortASC"
+            name="sort"
+            type="radio"
+            value="ASC"
+            data-testid="column-sort-input-asc"
+            onChange={ (e) => setSuccessors(e.target.value) }
+          />
+        </label>
+        <label htmlFor="sortDESC">
+          Descendente
+          <input
+            id="sortDESC"
+            name="sort"
+            type="radio"
+            value="DESC"
+            data-testid="column-sort-input-desc"
+            onChange={ (e) => setSuccessors(e.target.value) }
+          />
+        </label>
+        <hr />
+        <button
+          type="button"
+          data-testid="column-sort-button"
+          onClick={ handleSort }
+        >
+          Order
+        </button>
+      </form>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
@@ -284,11 +284,10 @@ describe("Testes para cobertura total da aplicação", () => {
     expect(editedTable).toBeInTheDocument();
     
     const urlTable = screen.getByRole('columnheader', {  name: /url/i});
-    expect(urlTable).toBeInTheDocument();
-  
+    expect(urlTable).toBeInTheDocument(); 
 });
 
-it("Verifica chamada da API inputs e botões renderizados na tela", async () => {
+it("Verifica chamada da API após filtro por nome do planeta", async () => {
     jest.spyOn(global, 'fetch')
       .mockResolvedValue({ json: jest.fn().mockResolvedValue(planetsMock) })
       render(<App />);
@@ -310,7 +309,7 @@ it("Verifica chamada da API inputs e botões renderizados na tela", async () => 
     jest.restoreAllMocks()
   });
 
-  it("Verifica chamada da API inputs e botões renderizados na tela", async () => {  
+  it("Verifica inputs e botões renderizados na tela", async () => {  
       render(<App />);
     
     const selectColumn = screen.getByText(/column:/i);
@@ -346,9 +345,7 @@ it("Verifica chamada da API inputs e botões renderizados na tela", async () => 
     const allDelete = screen.getByRole('button', { name: /remover todas filtragens/i })
     expect(allDelete).toBeInTheDocument();
     userEvent.click(allDelete);
-
 });
-
 
   it("Verifica condicional 'maior que'", () => {
       render(<App />);
@@ -395,7 +392,6 @@ it("Verifica chamada da API inputs e botões renderizados na tela", async () => 
     userEvent.click(filterDelete); 
     });
 
-
     it("Verifica condicional 'igual a'", () => {
       render(<App />);
   
@@ -416,5 +412,85 @@ it("Verifica chamada da API inputs e botões renderizados na tela", async () => 
     const filterDelete = screen.getByRole('button', {name: /delete/i})
     expect(filterDelete).toBeInTheDocument();
     userEvent.click(filterDelete); 
+    });
+
+    it("Verifica inputs da seção de ordenar", () => {
+      render(<App />);
+  
+    const order = screen.getByText(/order:/i);
+    expect(order).toBeInTheDocument();
+    const orderSelect = screen.getByRole('combobox', {  name: /order:/i})
+    expect(orderSelect).toBeInTheDocument();
+    expect(orderSelect).toHaveValue('population');
+
+    const ASC = screen.getByText(/ascendente/i);
+    expect(ASC).toBeInTheDocument();
+    const checkASC = screen.getByRole('radio', {  name: /ascendente/i});
+    expect(checkASC).toBeInTheDocument();
+    const DESC = screen.getByText(/descendente/i);
+    expect(DESC).toBeInTheDocument();
+    const checkDESC = screen.getByRole('radio', {  name: /descendente/i})
+    expect(checkDESC).toBeInTheDocument();
+    const buttonOrder = screen.getByRole('button', {  name: /order/i})
+    expect(buttonOrder).toBeInTheDocument();
+    });
+
+    it("Verifica ordenação Ascendente", () => {
+      render(<App />);
+  
+    const order = screen.getByText(/order:/i);
+    expect(order).toBeInTheDocument();
+    const orderSelect = screen.getByRole('combobox', {  name: /order:/i})
+    expect(orderSelect).toBeInTheDocument();
+    expect(orderSelect).toHaveValue('population');
+
+    const ASC = screen.getByText(/ascendente/i);
+    expect(ASC).toBeInTheDocument();
+    const checkASC = screen.getByRole('radio', {  name: /ascendente/i});
+    userEvent.type(checkASC, 'ASC');
+    expect(checkASC).toBeInTheDocument();
+    const DESC = screen.getByText(/descendente/i);
+    expect(DESC).toBeInTheDocument();
+    const checkDESC = screen.getByRole('radio', {  name: /descendente/i})
+    userEvent.type(checkDESC, 'DESC');
+    expect(checkDESC).toBeInTheDocument();
+    const buttonOrder = screen.getByRole('button', {  name: /order/i})
+    expect(buttonOrder).toBeInTheDocument();
+    userEvent.click(buttonOrder)
+    });
+
+    it("Verifica ordenação Ascendente", async () => {
+      render(<App />);
+  
+      const orderSelect = screen.getByTestId('column-sort')
+      userEvent.selectOptions(orderSelect, 'population')
+      expect(orderSelect).toHaveValue('population');
+  
+      const radioASC = screen.getByRole('radio', {  name: /ascendente/i})
+      userEvent.click(radioASC)
+  
+      const buttonOrder = screen.getByRole('button', {  name: /order/i})
+      userEvent.click(buttonOrder)
+
+      // const planetASC = await waitfor( () => screen.getByRole('cell', {  name: /dagobah/i}))
+      // expect(planetASC).toBeInTheDocument();
+    });
+
+    it("Verifica ordenação Descendente", async () => {
+      render(<App />);
+  
+    const orderSelect = screen.getByTestId('column-sort')
+    userEvent.selectOptions(orderSelect, 'diameter')
+    expect(orderSelect).toHaveValue('diameter');
+
+    const radioDESC = screen.getByRole('radio', {name: /descendente/i})
+    userEvent.click(radioDESC)
+
+    const buttonOrder = screen.getByRole('button', {  name: /order/i})
+    userEvent.click(buttonOrder)
+
+    // const planetASC = await waitFor(() => screen.getByRole('cell', {  name: /dagobah/i}), 2000)
+    // expect(planetASC[0].textContent).toBe('Bespin')
+
     });
 });
