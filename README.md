@@ -1,6 +1,6 @@
 # :star: Projeto Star Wars Planets Search!
 
-![img](projectIntro.gif)
+![img](https://media.giphy.com/media/l1uguGf2RVIsTXNDO/giphy.gif)
 
 -----
 
