@@ -36,6 +36,11 @@ npm install
 
 -----
 
+## 🛠️ Ferramentas & Metodologias Utilizadas
+
+  -[React](https://reactjs.org/docs/getting-started.html);
+  * Context API;
+  * Hooks.
 
 <!--
 
