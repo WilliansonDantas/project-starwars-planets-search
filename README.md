@@ -17,8 +17,6 @@ npm install
 
 -----
 
-<!--
-
 <details>
   <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary><br />
 
@@ -26,59 +24,22 @@ npm install
 
 </details>
 
-<details>
-  <summary><strong>:memo: Habilidades</strong></summary><br />
+-----
 
-  Nesse projeto você irá:
+## 👨🏻‍💻 Habilidades
 
-  * Utilizar a _Context API_ do **React** para gerenciar estado.
-  * Utilizar o _React Hook useState_;
-  * Utilizar o _React Hook useContext_;
-  * Utilizar o _React Hook useEffect_;
-  * Criar _React Hooks_ customizados.
-  * Escrever testes para garantir que sua aplicação possua uma boa cobertura de testes.
+  * Utiliza a _Context API_ do **React** para gerenciar estado.
+  * Utiliza o _React Hook useState_;
+  * Utiliza o _React Hook useContext_;
+  * Utiliza o _React Hook useEffect_;
+  * Cria _React Hooks_ customizados.
+  * Testes para garantir que sua aplicação possua uma boa cobertura de testes.
 
-</details>
+-----
 
-# Orientações
 
-<details>
-  <summary><strong>‼️ Antes de começar a desenvolver</strong></summary><br />
+<!--
 
-  1. Clone o repositório
-
-  - Use o comando: `git clone git@github.com:tryber/sd-021-b-project-starwars-planets-search.git`.
-  - Entre na pasta do repositório que você acabou de clonar:
-    - `cd sd-021-b-project-starwars-planets-search`
-
-  2. Instale as dependências
-
-  - `npm install`.
-
-  3. Crie uma branch a partir da branch `master`
-
-  - Verifique que você está na branch `master`
-    - Exemplo: `git branch`
-  - Se não estiver, mude para a branch `master`
-    - Exemplo: `git checkout master`
-  - Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
-    - Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    - Exemplo: `git checkout -b joaozinho-sd-021-b-project-starwars-planets-search`
-
-  4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
-
-  - Verifique que as mudanças ainda não estão no _stage_
-    - Exemplo: `git status` (deve aparecer listada a pasta _joaozinho_ em vermelho)
-  - Adicione o novo arquivo ao _stage_ do Git
-    - Exemplo:
-      - `git add .` (adicionando todas as mudanças - _que estavam em vermelho_ - ao stage do Git)
-      - `git status` (deve aparecer listado o arquivo _joaozinho/README.md_ em verde)
-  - Faça o `commit` inicial
-    - Exemplo:
-      - `git commit -m 'iniciando o projeto x'` (fazendo o primeiro commit)
-      - `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
-
-</details>
 
 <details>
   <summary><strong>🎛 Linter</strong></summary><br />
