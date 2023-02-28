@@ -1,5 +1,7 @@
 # :star: Projeto Star Wars Planets Search!
 
+Consiste em uma lista de planetas do universo de Star Wars com filtros usando **Context API e Hooks** para controlar os estados globais.
+
 ![img](https://media.giphy.com/media/l1uguGf2RVIsTXNDO/giphy.gif)
 
 -----
@@ -20,7 +22,7 @@ npm install
 <details>
   <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary><br />
 
-  Você vai desenvolver uma lista com filtros de planetas do universo de Star Wars usando **Context API e Hooks** para controlar os estados globais.
+  Você vai desenvolver uma 
 
 </details>
 
