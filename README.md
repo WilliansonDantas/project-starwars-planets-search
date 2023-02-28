@@ -1,8 +1,8 @@
 # :star: Projeto Star Wars Planets Search!
 
-<div align="center">
-![img](https://media.giphy.com/media/l1uguGf2RVIsTXNDO/giphy.gif)
-</div>
+<img align="center">
+src="https://media.giphy.com/media/l1uguGf2RVIsTXNDO/giphy.gif"
+</img>
 
 -----
 
