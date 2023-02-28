@@ -30,17 +30,19 @@ npm install
 
 ## 👨🏻‍💻 Habilidades
 
-  * React.js;
-  * Context API;
-  * Hooks.
+  - Utilizar a _Context API_ do **React** para gerenciar estado.
+  - Utilizar o _React Hook useState_;
+  - Utilizar o _React Hook useContext_;
+  - Utilizar o _React Hook useEffect_;
+  - Criar _React Hooks_ customizados;
+  - Escrever testes para garantir uma boa cobertura de testes.
 
 -----
 
 ## 🛠️ Ferramentas & Metodologias Utilizadas
 
-  -[React](https://reactjs.org/docs/getting-started.html);
-  * Context API;
-  * Hooks.
+  - [React.js](https://reactjs.org/docs/getting-started.html);
+  - [Context API e Hooks](https://reactjs.org/docs/hooks-intro.html?).
 
 <!--
 
