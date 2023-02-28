@@ -1,4 +1,4 @@
-# Projeto Star Wars Planets Search!
+# :star: Projeto Star Wars Planets Search!
 
 ![img](projectIntro.gif)
 
