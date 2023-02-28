@@ -34,6 +34,14 @@ npm install
   - [React.js](https://reactjs.org/docs/getting-started.html);
   - [Context API e Hooks](https://reactjs.org/docs/hooks-intro.html?).
 
+-----
+
+## 🧪 Executando os testes de cobertura
+
+```
+npm run test-coverage
+```
+
 <!--
 
 
