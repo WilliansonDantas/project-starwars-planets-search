@@ -29,6 +29,14 @@ npm install
 
 -----
 
+## 🧪 Executando os testes de cobertura
+
+```
+npm run test-coverage
+```
+
+-----
+
 ## 🛠️ Ferramentas & Metodologias Utilizadas
 
   - [React.js](https://reactjs.org/docs/getting-started.html);
@@ -36,11 +44,7 @@ npm install
 
 -----
 
-## 🧪 Executando os testes de cobertura
-
-```
-npm run test-coverage
-```
+⌨️ Desenvolvido por [Willianson Dantas](https://www.linkedin.com/in/willianson-dantas/)
 
 <!--
 
