@@ -4,9 +4,6 @@ Consiste em uma lista de planetas do universo de Star Wars com filtros usando **
 
 ![img](https://static.wikia.nocookie.net/ptstarwars/images/c/cc/Star-wars-logo-new-tall.jpg/revision/latest?cb=20190525165732)
 
-
-![img](https://media.giphy.com/media/l1uguGf2RVIsTXNDO/giphy.gif)
-
 -----
 
 ## 📋 Execute o projeto em sua máquina
