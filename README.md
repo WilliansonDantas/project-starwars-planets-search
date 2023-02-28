@@ -30,12 +30,12 @@ npm install
 
 ## 👨🏻‍💻 Habilidades
 
+  * React.js;.
+  * Utiliza o _React Hook useState_;
   * Utiliza a _Context API_ do **React** para gerenciar estado.
   * Utiliza o _React Hook useState_;
   * Utiliza o _React Hook useContext_;
   * Utiliza o _React Hook useEffect_;
-  * Cria _React Hooks_ customizados.
-  * Testes para garantir que sua aplicação possua uma boa cobertura de testes.
 
 -----
 
