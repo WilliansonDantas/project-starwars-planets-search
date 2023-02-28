@@ -10,8 +10,8 @@
 Clone o repositório:
 
 ```
-git clone git@github.com:WilliansonDantas/project-trybe-futebol-clube.git
-cd trybe-futebol-clube
+git clone git@github.com:WilliansonDantas/project-starwars-planets-search.git
+cd starwars-planets-search
 npm install
 ```
 
