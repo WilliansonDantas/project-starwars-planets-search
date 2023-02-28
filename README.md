@@ -8,7 +8,6 @@ Consiste em uma lista de planetas do universo de Star Wars com filtros usando **
 
 ## 📋 Execute o projeto em sua máquina
 
-
 Clone o repositório:
 
 ```
@@ -16,15 +15,6 @@ git clone git@github.com:WilliansonDantas/project-starwars-planets-search.git
 cd starwars-planets-search
 npm install
 ```
-
------
-
-<details>
-  <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary><br />
-
-  Você vai desenvolver uma 
-
-</details>
 
 -----
 
